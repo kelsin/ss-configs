@@ -35,5 +35,11 @@
                 :value-type directory)
   :group 'savingstar)
 
+(defcustom savingstar-urls '(("web" . "http://localhost:3000") ("api" . "http://localhost:3001"))
+  "This list shows the url locations of these apps"
+  :type '(alist :key-type string
+                :value-type string)
+  :group 'savingstar)
+
 (provide 'savingstar-customs)
 ;;; savingstar-customs.el ends here

@@ -39,5 +39,21 @@
                          savingstar-dirs))))
 (define-key savingstar-map (kbd "g") 'savingstar/goto)
 
+(defun savingstar/url-open ()
+  "Opens the url for the current file if there is one"
+  (interactive)
+  (catch 'found
+    (let ((file (buffer-file-name)))
+      (if file
+          (dolist (data savingstar-dirs)
+            (let ((dir (expand-file-name (cdr data)))
+                  (label (car data)))
+              (if (string-match dir file)
+                  (progn
+                    (system-open (cdr (assoc label
+                                             savingstar-urls)))
+                    (throw 'found t)))))))))
+(define-key savingstar-map (kbd "w") 'savingstar/url-open)
+
 (provide 'savingstar)
 ;;; savingstar.el ends here
